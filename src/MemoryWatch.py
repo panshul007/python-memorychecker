@@ -11,24 +11,19 @@ import string
 from mainpackage.EmailUtil import sendServerAlertMail
 from multiprocessing import Process
 
-panshul = "panshul@innoplexia.com"
-christian = "christian@innoplexia.com"
-rene = "rene@innoplexia.com"
-hefner = "joachim.hefner@verivox.com"
-philipp = "philipp.walser@verivox.com"
-navid = "navid.bazzazzadeh@verivox.com"
+panshul = "panshul@domain.com"
+user2 = "user2@domain.com"
 
-recepients = [panshul, christian, rene, hefner, philipp, navid]
+recepients = [panshul, user2]
 
 #machineName, address = argv
 
-machineName, address = "Data gateway","vsrest.ixurl.de:8080"
-#machineName, address = "Data gateway","localhost:8080"
+machineName, address = "Data gateway","localhost:8080"
 
 def checkConnection(address):
     try:
         requestString = format('http://%s/datagateway/status' %(address))
-        response = requests.get(requestString,auth=('verivox','verivoxuser'))
+        response = requests.get(requestString,auth=('user','password'))
         if response.status_code == 200:
             return True
         else:
@@ -38,7 +33,7 @@ def checkConnection(address):
 
 def requestStatus(address):
     requestString = format('http://%s/datagateway/status/jvm' %(address))
-    response = requests.get(requestString,auth=('verivox','verivoxuser'))
+    response = requests.get(requestString,auth=('user','password'))
     #print response.status_code
     return response
     
